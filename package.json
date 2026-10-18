@@ -1,0 +1,38 @@
+{
+  "name": "peppy-tides",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3048",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3048",
+    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
+    "db:seed": "node --env-file=.env.local scripts/seed.mjs",
+    "test": "node --env-file=.env.local --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "worker": "node --env-file=.env.local --import tsx scripts/worker.ts",
+    "research:queue": "node --env-file=.env.local --import tsx scripts/queue-research.ts",
+    "research:refresh": "node --env-file=.env.local --import tsx scripts/refresh.ts",
+    "db:setup-local": "node --env-file=.env.local scripts/setup-local.mjs",
+    "db:seed-trials": "node --env-file=.env.local --import tsx scripts/seed-trials.ts"
+  },
+  "dependencies": {
+    "next": "^16.4.2",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
