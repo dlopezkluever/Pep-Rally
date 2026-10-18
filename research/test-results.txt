@@ -1,0 +1,44 @@
+
+> peppy-tides@0.1.0 test
+> node --env-file=.env.local --import tsx --test tests/*.test.ts
+
+✔ query plan applies the PRD query set and bounds alias expansion (2642.3294ms)
+✔ PubMed adapter pages to each query's limit and reports truncation (63.7598ms)
+✔ PubMed requests never persist credentials in search records (2.0095ms)
+✔ ClinicalTrials adapter follows page tokens up to the limit (5.1494ms)
+✔ services that answer 404 or 204 for no matches yield empty results, not failures (4.2052ms)
+✔ PubChem and FDA candidates carry screening caveats and seed provenance (7.2694ms)
+✔ RCSB adapter batches entry details and tolerates unknown entries (6.7951ms)
+✔ UniProt adapter records release provenance and warns about precursor sequences (6.1946ms)
+✔ IUPHAR adapter is skipped without a key and sends the key header when configured (4.6467ms)
+✔ a rediscovered paper merges into the curated source with the same PMID (338.4088ms)
+✔ a new source is reported new, and ambiguous identifiers need a human (207.6282ms)
+✔ a discovery job records queries, search scope, failures, skips and changes (714.231ms)
+✔ a job fails only when every attempted source fails; conflicts are surfaced, not fatal (337.364ms)
+✔ name, DOI, evidence ceiling, and language guardrails preserve context (2796.5468ms)
+✔ anonymous database reads cannot expose draft claims or preview (300.1656ms)
+✔ researcher cannot approve claims or forge assessment reviewer identity (146.3537ms)
+✔ wording and citation changes invalidate prior approval (185.3801ms)
+✔ stale editor tabs cannot approve wording changed after the page was opened (256.4225ms)
+✔ unsupported human extrapolation is rejected by database review guard (149.2565ms)
+✔ None Identified requires a completed search date (235.4597ms)
+✔ incomplete revision fails publication atomically (218.5232ms)
+✔ claim flags block publication until an editor resolves them (147.8569ms)
+✔ citations, registry IDs, and cross-revision references enforce integrity (318.8227ms)
+✔ worker identity is fixed by database login and cannot authenticate or publish (45.3793ms)
+✔ publication waits for concurrent review changes and rejects a revoked claim (212.7682ms)
+✔ publish is idempotent and freezes content, citations, and extension inserts (365.771ms)
+✔ published catalog supports aliases, typo search, filtering, and withdrawal (365.6885ms)
+✔ AI extraction writes an interpretation and unreviewed claims only (300.0544ms)
+✔ real browser: search, citations, areas, comparison, themes, mobile, authentication and review (26683.1813ms)
+✔ carrying a published revision forward copies content but clears every approval (4593.4587ms)
+✔ carry forward refuses unrelated revisions and non-empty targets (804.1795ms)
+✔ related peptides are linked through a sourced claim and never to themselves (392.0778ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41616.321

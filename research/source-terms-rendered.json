@@ -1,0 +1,51 @@
+[
+  {
+    "url": "https://clinicaltrials.gov/about-site/terms-conditions",
+    "status": 200,
+    "title": "Terms and Conditions | ClinicalTrials.gov",
+    "retrievedAt": "2026-10-18T17:27:20.850Z",
+    "relevantLines": [
+      "Search for terms",
+      "Other terms",
+      "HomeAbout this siteTerms and Conditions",
+      "Terms and Conditions",
+      "The following Terms and Conditions apply for use of ClinicalTrials.gov data. Downloading ClinicalTrials.gov data indicates your acceptance of the following Terms and Conditions. These Terms and Conditions apply to all data obtained from ClinicalTrials.gov, independent of format and method of acquisition.",
+      "The ClinicalTrials.gov data carry an international copyright outside the United States and its Territories or Possessions. Some ClinicalTrials.gov data may be subject to the copyright of third parties; you should consult these entities for any additional terms of use.",
+      "These terms and conditions are in effect as long as the user retains any of the data obtained from ClinicalTrials.gov.",
+      "Terms and Conditions",
+      "FOIA requests"
+    ]
+  },
+  {
+    "url": "https://clinicaltrials.gov/data-api/about-api",
+    "status": 200,
+    "title": "About API | ClinicalTrials.gov",
+    "retrievedAt": "2026-10-18T17:27:22.068Z",
+    "relevantLines": [
+      "Search for terms",
+      "Other terms",
+      "Terms and Conditions",
+      "FOIA requests"
+    ]
+  },
+  {
+    "url": "https://www.uniprot.org/help/programmatic_access",
+    "error": "page.goto: Timeout 40000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://www.uniprot.org/help/programmatic_access\", waiting until \"networkidle\"\u001b[22m\n"
+  },
+  {
+    "url": "https://www.genome.gov/genetics-glossary/Peptide",
+    "status": 200,
+    "title": "Peptide",
+    "retrievedAt": "2026-10-18T17:28:06.161Z",
+    "relevantLines": [
+      "Per Executive Order 14434, federal agencies are now using \"Super Intelligence\" (SI) in place of \"Artificial Intelligence\" (AI). You may see both terms across NIH content during this transition.",
+      "Talking Glossary of Genomic and Genetic Terms",
+      "Peptide",
+      "​PEPTIDE",
+      "A peptide is a short chain of amino acids (typically 2 to 50) linked by chemical bonds (called peptide bonds). A longer chain of linked amino acids (51 or more) is a polypeptide. The proteins manufactured inside cells are made from one or more polypeptides.",
+      "Peptide. I can still remember very vividly in middle school when I first learned about proteins. My science teacher used Lego building blocks as an analogy to describe them. Each individual brick is like an amino acid, and a few of them locked together to form a peptide. A much longer chain of them is a polypeptide, and then those get assembled together in various complex shapes to form proteins. I'm not sure if it was the most accurate representation of peptide structures that exists, but it did give me a good way to visualize the structure of proteins.",
+      "Amino Acids",
+      "COPYRIGHT"
+    ]
+  }
+]
