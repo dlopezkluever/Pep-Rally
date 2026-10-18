@@ -1,0 +1,2024 @@
+# Product Requirements Document  
+## Peptide Research Wiki Platform
+
+**Status:** Ready for implementation planning  
+**Product type:** Scientific research encyclopedia / peptide knowledge platform  
+**Primary goal:** Build the most useful, transparent, consumer-readable peptide research reference possible while preserving scientific nuance, provenance, regulatory context, and safety information.
+
+---
+
+# 1. PRODUCT VISION
+
+Build a modern web platform that functions as a **mini-Wikipedia for peptides and peptide-related research compounds**.
+
+The platform should allow a visitor to:
+
+- search for a peptide by name or synonym
+- browse peptides by category
+- understand what a peptide is
+- understand how it is thought to work
+- understand what has actually been studied
+- distinguish cell, animal, observational, and clinical evidence
+- see human clinical trials when they exist
+- understand important uncertainties
+- see regulatory status
+- understand safety concerns and evidence gaps
+- follow citations to primary scientific sources
+- discover related peptides and research areas
+
+The product must avoid the low-quality pattern common to many peptide websites where speculative claims, animal studies, anecdotal claims, and established human evidence are presented as though they are equivalent.
+
+The defining product principle is:
+
+> Every scientific claim should make clear what kind of evidence supports it.
+
+The platform will support two audience-specific frontend experiences while sharing one canonical scientific knowledge base.
+
+---
+
+# 2. PRIMARY AUDIENCES
+
+## Audience A: Women approximately 21–51
+
+This presentation should feel:
+
+- sophisticated
+- modern
+- premium
+- approachable
+- wellness-adjacent without becoming pseudoscientific
+- medically credible
+- visually polished
+- feminine without relying on stereotypical pink branding
+
+Likely areas of higher browsing interest may include:
+
+- metabolic research
+- healthy aging
+- skin biology
+- reproductive biology
+- neurological research
+- recovery
+- sleep
+- mitochondrial biology
+- body composition research
+
+These topics must only be associated with particular compounds where evidence supports the connection.
+
+---
+
+## Audience B: Adults approximately 50+
+
+This presentation should feel:
+
+- trustworthy
+- mature
+- accessible
+- calm
+- readable
+- medically credible
+- simple to navigate
+
+Requirements include:
+
+- larger typography
+- strong contrast
+- generous spacing
+- obvious navigation
+- minimal visual clutter
+- larger tap targets
+- plain-English explanations
+- accessible terminology
+- WCAG-minded interaction design
+
+The product should feel modern without looking like either a bodybuilding store or a senior-care website.
+
+---
+
+# 3. CORE ARCHITECTURAL PRINCIPLE
+
+There must be **one canonical scientific dataset**.
+
+Do NOT create separate scientific articles for the two audiences.
+
+Architecture:
+
+```text
+CANONICAL PEPTIDE KNOWLEDGE BASE
+              ↓
+       Content Rendering Layer
+          ↙          ↘
+Women's Experience   50+ Experience
+```
+
+The following information must remain identical between audience experiences:
+
+- scientific facts
+- references
+- evidence classifications
+- regulatory status
+- safety information
+- uncertainties
+- clinical trials
+- data provenance
+
+Only presentation may differ:
+
+- layout
+- typography
+- homepage emphasis
+- imagery
+- copy framing
+- information density
+- discovery flows
+- explanation depth
+
+---
+
+# 4. PRODUCT SCOPE
+
+The MVP consists of six major systems:
+
+1. Peptide Knowledge Database
+2. Research Acquisition Pipeline
+3. Evidence Classification System
+4. Public Peptide Wiki
+5. Research Admin / Review Interface
+6. Two Audience Presentation Layers
+
+---
+
+# 5. NON-GOALS FOR MVP
+
+Do not initially build:
+
+- medical diagnosis
+- personalized treatment recommendations
+- dosage calculators
+- cycle builders
+- injection instructions
+- individualized health recommendations
+- AI doctor/chatbot
+- automatic recommendations based on medical conditions
+- user-generated medical claims
+- forums
+- social feeds
+- subscription communities
+- personalized health profiles
+
+Ecommerce is not required for the initial MVP.
+
+The architecture may support later linking to a separate commerce/catalog system, but scientific editorial content should remain logically separate from commercial product representations.
+
+Do not build purchasing workflows for products whose sale would require legal or regulatory review unless separately authorized.
+
+---
+
+# 6. SOURCE HIERARCHY
+
+Scientific information must originate from reputable primary or authoritative sources rather than other peptide-store marketing websites.
+
+Preferred sources include:
+
+## Tier 1: Government / authoritative databases
+
+- FDA
+- NIH
+- PubMed
+- ClinicalTrials.gov
+- PubChem
+
+## Tier 2: Specialist scientific databases
+
+- IUPHAR/BPS Guide to Pharmacology
+- RCSB Protein Data Bank
+- UniProt where appropriate
+- NCBI resources
+- other high-quality curated biomedical databases
+
+## Tier 3: Scientific literature
+
+- systematic reviews
+- meta-analyses
+- randomized controlled trials
+- clinical studies
+- observational studies
+- animal studies
+- in-vitro studies
+
+## Tier 4: Secondary explanation sources
+
+Used only for orientation or discovery.
+
+They must not be the sole basis for substantive scientific claims.
+
+Examples:
+
+- university research pages
+- academic medical centers
+- reputable scientific reviews
+- regulatory summaries
+
+Commercial peptide websites may be examined for:
+
+- UX
+- taxonomy
+- page structure
+- terminology
+- catalog discovery
+- disclaimer approaches
+
+They must NOT be treated as authoritative scientific sources.
+
+---
+
+# 7. RESEARCH ACQUISITION SYSTEM
+
+Create a repeatable pipeline that can build and update peptide records.
+
+The pipeline should accept:
+
+```text
+canonical peptide name
+optional aliases
+optional seed identifiers
+```
+
+and retrieve or help researchers retrieve relevant information.
+
+Expected source queries include:
+
+```text
+"<peptide>"
+"<peptide>" human
+"<peptide>" clinical trial
+"<peptide>" randomized
+"<peptide>" pharmacokinetics
+"<peptide>" mechanism
+"<peptide>" safety
+"<peptide>" toxicity
+"<peptide>" animal
+"<peptide>" review
+```
+
+The system should support API retrieval where practical and browser/computer-use research where APIs are unavailable.
+
+---
+
+# 8. HUMAN-IN-THE-LOOP REQUIREMENT
+
+The system must NOT automatically publish AI-generated scientific pages.
+
+Required workflow:
+
+```text
+SOURCE DISCOVERY
+      ↓
+SOURCE INGESTION
+      ↓
+FACT EXTRACTION
+      ↓
+AI SYNTHESIS
+      ↓
+DRAFT
+      ↓
+REVIEW
+      ↓
+APPROVED
+      ↓
+PUBLISHED
+```
+
+Every peptide must have a status:
+
+```text
+unresearched
+researching
+draft
+needs_review
+approved
+published
+archived
+```
+
+AI may assist research and synthesis.
+
+AI must not invent missing facts.
+
+If evidence is absent or ambiguous, the system should explicitly store:
+
+```text
+unknown
+insufficient evidence
+conflicting evidence
+not established
+```
+
+rather than infer a conclusion.
+
+---
+
+# 9. CORE DATA MODEL
+
+Create normalized relational models rather than storing entire peptide pages as unstructured markdown.
+
+At minimum implement the following entities.
+
+---
+
+## Peptide
+
+Fields:
+
+```text
+id
+slug
+canonical_name
+short_name
+summary
+plain_english_summary
+
+peptide_type
+endogenous_status
+development_status
+
+sequence
+molecular_formula
+molecular_weight
+
+pubchem_id
+uniprot_id
+iuphar_id
+other_identifiers
+
+first_reported_date
+
+evidence_grade
+human_evidence_grade
+safety_evidence_grade
+
+fda_status
+regulatory_summary
+
+editorial_status
+
+created_at
+updated_at
+reviewed_at
+published_at
+```
+
+---
+
+## Peptide Alias
+
+```text
+id
+peptide_id
+alias
+alias_type
+```
+
+Example alias types:
+
+```text
+scientific
+commercial
+research_code
+abbreviation
+legacy_name
+```
+
+---
+
+## Research Area
+
+Examples:
+
+```text
+Metabolism
+Mitochondrial Biology
+Skin Biology
+Neuroscience
+Sleep
+Tissue Repair
+Immune Biology
+Muscle Biology
+Healthy Aging
+Growth Hormone Axis
+Reproductive Biology
+Cardiovascular Biology
+```
+
+Implement many-to-many relationship with peptides.
+
+---
+
+## Mechanism
+
+```text
+id
+peptide_id
+target
+pathway
+mechanism_summary
+confidence
+source_ids[]
+```
+
+---
+
+## Evidence Record
+
+This is one of the most important tables.
+
+```text
+id
+peptide_id
+
+evidence_type
+study_design
+species
+population
+
+title
+summary
+finding
+
+sample_size
+year
+
+confidence
+limitations
+
+source_id
+
+editorial_status
+```
+
+Allowed evidence types:
+
+```text
+in_vitro
+animal
+case_report
+observational
+pilot_human
+clinical_trial
+randomized_controlled_trial
+systematic_review
+meta_analysis
+regulatory
+unknown
+```
+
+---
+
+## Scientific Source
+
+```text
+id
+
+source_type
+title
+authors
+publication
+publication_date
+
+doi
+pmid
+clinical_trial_id
+url
+
+abstract
+notes
+
+retrieved_at
+
+source_quality
+```
+
+---
+
+## Clinical Trial
+
+```text
+id
+peptide_id
+
+registry
+registry_id
+
+title
+phase
+status
+enrollment
+
+population
+intervention
+comparator
+primary_outcomes
+
+start_date
+completion_date
+
+results_available
+
+source_url
+```
+
+---
+
+## Safety Record
+
+```text
+id
+peptide_id
+
+category
+finding
+severity
+evidence_type
+
+known_or_theoretical
+
+source_id
+```
+
+Categories might include:
+
+```text
+adverse_event
+toxicity
+drug_interaction
+contraindication
+regulatory_warning
+unknown_long_term_risk
+immunogenicity
+contamination_risk
+```
+
+---
+
+## Regulatory Record
+
+```text
+id
+peptide_id
+
+jurisdiction
+agency
+
+status
+statement
+date
+
+source_url
+```
+
+---
+
+## Evidence Claim
+
+A structured scientific claim used in published content.
+
+```text
+id
+peptide_id
+
+claim_text
+claim_type
+
+evidence_strength
+
+source_ids[]
+
+approved
+reviewed_at
+```
+
+This allows the site to trace visible claims back to their references.
+
+---
+
+# 10. EVIDENCE MODEL
+
+Every peptide should receive separate grades.
+
+Do NOT assign one simplistic overall score.
+
+At minimum display:
+
+```text
+Preclinical evidence
+Human evidence
+Clinical evidence
+Safety evidence
+Regulatory maturity
+```
+
+Suggested grades:
+
+```text
+Strong
+Moderate
+Limited
+Very Limited
+None Identified
+Conflicting
+```
+
+An additional visual maturity scale may be:
+
+```text
+Level 0 — Mechanistic / theoretical only
+Level 1 — In-vitro evidence
+Level 2 — Animal evidence
+Level 3 — Early human evidence
+Level 4 — Controlled human evidence
+Level 5 — Established clinical evidence
+```
+
+The system should never automatically imply:
+
+```text
+Level 2 → Level 4
+```
+
+Animal efficacy must remain clearly distinguishable from human evidence.
+
+---
+
+# 11. PEPTIDE PAGE INFORMATION ARCHITECTURE
+
+Every peptide page should follow a standardized structure.
+
+---
+
+## Header
+
+Display:
+
+- peptide name
+- aliases
+- peptide class
+- evidence badge
+- regulatory badge
+- last reviewed date
+
+Include concise:
+
+> What is this?
+
+summary.
+
+---
+
+## Evidence Snapshot
+
+Immediately visible.
+
+Example:
+
+```text
+Preclinical Evidence      Moderate
+Human Evidence            Very Limited
+Clinical Trials           Limited
+Long-Term Safety          Unknown
+FDA Approved              No
+```
+
+Clicking a grade should explain how the grade was determined.
+
+---
+
+## Section 1 — Overview
+
+Answer:
+
+- What is it?
+- Where did it come from?
+- Is it naturally occurring or synthetic?
+- Why are scientists studying it?
+
+---
+
+## Section 2 — How It Works
+
+Describe:
+
+- molecular targets
+- pathways
+- proposed mechanisms
+
+Clearly label:
+
+```text
+Established mechanism
+Supported hypothesis
+Proposed mechanism
+Unknown
+```
+
+Provide plain-English explanations alongside technical descriptions.
+
+---
+
+## Section 3 — Research Areas
+
+Show areas scientists have investigated.
+
+Example:
+
+```text
+Metabolic signaling
+Tissue repair
+Neurological function
+Inflammation
+Mitochondrial function
+```
+
+Never convert:
+
+> “studied in connection with”
+
+into:
+
+> “improves”
+
+unless appropriate evidence exists.
+
+---
+
+## Section 4 — Human Research
+
+Prioritize this section.
+
+Display:
+
+- number of known human studies
+- population
+- study type
+- sample size
+- findings
+- limitations
+
+Human research should always be separated from animal research.
+
+---
+
+## Section 5 — Preclinical Research
+
+Separate into:
+
+```text
+Animal Studies
+Cell / In-vitro Studies
+```
+
+---
+
+## Section 6 — Clinical Trials
+
+Show registered trials where available.
+
+Fields:
+
+- trial name
+- registry ID
+- phase
+- status
+- enrollment
+- intervention
+- outcomes
+- result availability
+
+Provide outbound source link.
+
+---
+
+## Section 7 — Safety & Unknowns
+
+This section must be prominent.
+
+Include:
+
+- known safety findings
+- known adverse events
+- theoretical risks
+- gaps in evidence
+- lack of long-term studies
+- regulatory warnings
+- unanswered questions
+
+Include a clear subsection:
+
+> What we do not know
+
+---
+
+## Section 8 — Regulatory Status
+
+Provide jurisdiction-specific information when available.
+
+At minimum support:
+
+```text
+United States / FDA
+```
+
+Potential later jurisdictions:
+
+```text
+European Union
+United Kingdom
+Canada
+Australia
+```
+
+---
+
+## Section 9 — Research Timeline
+
+Chronological visualization of major studies.
+
+Example:
+
+```text
+1998 — Initial animal study
+2008 — Mechanism study
+2017 — Additional preclinical evidence
+2024 — Registered human trial
+```
+
+Every timeline entry must reference a real source.
+
+---
+
+## Section 10 — Related Peptides
+
+Relationship types may include:
+
+```text
+same receptor family
+same biological pathway
+similar peptide family
+same research area
+structural relationship
+```
+
+---
+
+## Section 11 — References
+
+Full citations.
+
+Allow filtering by:
+
+```text
+Human
+Animal
+In Vitro
+Reviews
+Clinical Trials
+Regulatory
+```
+
+---
+
+# 12. SEARCH
+
+Implement full-text search.
+
+Search across:
+
+```text
+canonical names
+aliases
+research codes
+mechanisms
+targets
+research areas
+```
+
+Search should tolerate:
+
+- spelling mistakes
+- abbreviations
+- synonyms
+
+Example:
+
+```text
+BPC157
+BPC-157
+Body Protection Compound
+```
+
+should all find the same page.
+
+---
+
+# 13. BROWSE EXPERIENCE
+
+Create discovery pages.
+
+---
+
+## Browse by Research Area
+
+Examples:
+
+```text
+Metabolism
+Healthy Aging
+Mitochondria
+Neurology
+Tissue Repair
+Skin Biology
+Sleep
+Immune Biology
+Muscle Biology
+Growth Hormone Axis
+```
+
+---
+
+## Browse by Evidence
+
+```text
+Established Human Evidence
+Human Clinical Research
+Early Human Research
+Preclinical Research
+Experimental / Limited Evidence
+```
+
+---
+
+## Browse by Peptide Family
+
+Examples:
+
+```text
+GLP-1 / Incretin
+GHRH
+GHRP
+Thymosin
+Copper Peptides
+Melanocortin
+Mitochondrial Peptides
+Neuropeptides
+```
+
+The taxonomy must remain configurable through the admin interface.
+
+---
+
+# 14. COMPARISON FEATURE
+
+Allow users to compare 2–4 peptides.
+
+Comparison should show:
+
+```text
+classification
+mechanism
+research areas
+human evidence
+animal evidence
+clinical trials
+safety evidence
+regulatory status
+```
+
+Do NOT frame comparison as:
+
+> Which peptide should I take?
+
+Frame it as:
+
+> Compare the research.
+
+---
+
+# 15. CITATION UX
+
+Citations are a core feature, not an afterthought.
+
+Claims should display numbered references:
+
+```text
+BPC-157 has primarily been investigated in animal models.[4][7]
+```
+
+Hovering or clicking should reveal citation details.
+
+References should deep-link where possible to:
+
+- PubMed
+- DOI
+- ClinicalTrials.gov
+- FDA
+- PubChem
+- IUPHAR
+
+---
+
+# 16. SOURCE PROVENANCE
+
+The database must retain provenance.
+
+For every extracted piece of important information store:
+
+```text
+source
+retrieval date
+evidence type
+confidence
+editorial reviewer
+```
+
+Do not generate scientific assertions that cannot be traced back to a source.
+
+---
+
+# 17. ADMIN / RESEARCH INTERFACE
+
+Build an internal research dashboard.
+
+The dashboard should support:
+
+## Peptide management
+
+```text
+Create
+Edit
+Archive
+Publish
+Unpublish
+```
+
+---
+
+## Research queue
+
+Display peptides by:
+
+```text
+Unresearched
+Researching
+Needs Review
+Ready
+Published
+Needs Update
+```
+
+---
+
+## Evidence review
+
+Researchers should be able to inspect:
+
+```text
+claim
+supporting source
+study type
+evidence grade
+AI-generated summary
+```
+
+and approve or reject the claim.
+
+---
+
+## Source viewer
+
+Allow researchers to see:
+
+- source metadata
+- abstract
+- extracted facts
+- which claims cite the source
+- source URL
+
+---
+
+# 18. AI RESEARCH ASSISTANT
+
+Use LLMs to assist researchers.
+
+The AI can:
+
+- classify papers
+- extract study metadata
+- summarize abstracts
+- identify study species
+- identify sample sizes
+- classify evidence type
+- suggest mechanism relationships
+- draft plain-English explanations
+- identify conflicting findings
+
+The AI must NOT autonomously publish.
+
+The agent should always distinguish:
+
+```text
+SOURCE TEXT
+AI INTERPRETATION
+EDITOR-APPROVED CLAIM
+```
+
+---
+
+# 19. AUTOMATED CLAIM GUARDRAILS
+
+Create automated checks for problematic language.
+
+Flag phrases such as:
+
+```text
+treats
+cures
+prevents
+reverses
+guarantees
+heals
+boosts
+burns fat
+builds muscle
+anti-aging
+extends lifespan
+```
+
+when unsupported.
+
+Also flag unsupported transformations such as:
+
+```text
+animal study → human benefit
+mechanistic hypothesis → clinical effect
+association → causation
+small pilot → established efficacy
+```
+
+---
+
+# 20. REGULATORY / MEDICAL DISCLAIMER SYSTEM
+
+Build reusable disclosure components.
+
+At minimum support:
+
+## Educational disclaimer
+
+Explain that the content:
+
+- is educational
+- is not medical advice
+- does not replace professional medical care
+
+---
+
+## Evidence disclaimer
+
+Explain:
+
+- scientific evidence changes
+- inclusion of research does not establish efficacy
+- animal results may not translate to humans
+
+---
+
+## Regulatory disclosure
+
+Clearly show whether the compound:
+
+```text
+FDA approved
+investigational
+not FDA approved
+status unclear
+```
+
+Never infer approval merely because studies exist.
+
+---
+
+## Research-use disclosures
+
+If the later commercial business involves research-use-only products, create a dedicated regulatory and legal review process.
+
+Do not assume placing “Research Use Only” on a product automatically makes surrounding marketing compliant.
+
+All commercial claims should remain separately reviewable.
+
+---
+
+# 21. DESIGN SYSTEM
+
+Use a clean component-based design system.
+
+Recommended base:
+
+```text
+React
+TypeScript
+Next.js
+Tailwind CSS
+shadcn/ui
+```
+
+Alternative equivalent architecture is acceptable if justified.
+
+Priorities:
+
+```text
+accessibility
+performance
+SEO
+maintainability
+structured data
+component reuse
+```
+
+---
+
+# 22. BRAND VARIANT SYSTEM
+
+Do not fork the entire frontend.
+
+Implement a theme/profile system.
+
+Example:
+
+```typescript
+AudienceTheme {
+  id
+  typography
+  spacing
+  colors
+  imagery
+  contentDensity
+  homepageModules
+}
+```
+
+Possible URLs:
+
+```text
+/women/
+/50plus/
+```
+
+or separate branded domains using the same underlying application.
+
+Both render from identical peptide data.
+
+---
+
+# 23. WOMEN'S EXPERIENCE
+
+Visual qualities:
+
+```text
+warm
+premium
+editorial
+clean
+scientific
+calm
+```
+
+Avoid:
+
+```text
+hot-pink stereotypes
+bodybuilding imagery
+overly sexualized imagery
+pseudoscientific wellness aesthetics
+aggressive biohacker aesthetics
+```
+
+Pages can emphasize educational pathways around:
+
+```text
+metabolism
+healthy aging
+skin biology
+energy
+sleep
+recovery
+reproductive research
+brain health research
+```
+
+without implying medical benefits.
+
+---
+
+# 24. 50+ EXPERIENCE
+
+Prioritize:
+
+```text
+18px+ body text where practical
+high contrast
+large buttons
+simple navigation
+minimal animations
+plain language
+obvious breadcrumbs
+large search interface
+```
+
+Provide:
+
+```text
+Scientific explanation
+Plain-English explanation
+```
+
+where useful.
+
+---
+
+# 25. HOMEPAGE
+
+Primary homepage modules:
+
+```text
+Hero search
+
+Explore by Research Area
+
+Popular / Frequently Viewed Peptides
+
+Explore by Evidence Level
+
+Recently Updated Research
+
+How We Grade Evidence
+
+Understanding Peptide Research
+
+Safety & Regulatory Information
+```
+
+Search should be the primary interaction.
+
+---
+
+# 26. SEO
+
+Each peptide should have an indexable canonical page.
+
+Implement:
+
+- metadata
+- OpenGraph tags
+- canonical URLs
+- sitemap
+- robots.txt
+- structured headings
+- server-side rendering/static generation
+- schema.org structured data where appropriate
+
+Do not generate thousands of low-quality AI SEO pages.
+
+Only approved peptide profiles should be indexed.
+
+---
+
+# 27. PERFORMANCE
+
+Targets:
+
+```text
+Lighthouse Performance ≥ 90
+Accessibility ≥ 95
+Best Practices ≥ 95
+SEO ≥ 95
+```
+
+Core peptide pages should load quickly even on mobile.
+
+Use caching for research data.
+
+---
+
+# 28. ACCESSIBILITY
+
+Target WCAG 2.2 AA where practical.
+
+Requirements:
+
+- keyboard navigation
+- screen-reader labels
+- semantic headings
+- visible focus states
+- sufficient contrast
+- reduced motion support
+- accessible tables
+- scalable typography
+
+---
+
+# 29. INITIAL PEPTIDE CORPUS
+
+Begin with approximately 20–30 peptides rather than hundreds.
+
+Select entries spanning different evidence maturity levels.
+
+Suggested seed corpus may include widely discussed peptide categories such as:
+
+```text
+BPC-157
+GHK-Cu
+CJC-1295
+Ipamorelin
+MOTS-C
+SS-31 / Elamipretide
+Semax
+Selank
+Thymosin Alpha-1
+Thymosin Beta-4
+PT-141 / Bremelanotide
+Tesamorelin
+Sermorelin
+Oxytocin
+Kisspeptin
+GLP-1-related peptide therapeutics
+```
+
+The research system must validate exact nomenclature and regulatory status before publishing any record.
+
+Do not assume every item belongs in the same regulatory category.
+
+---
+
+# 30. MVP VALIDATION SET
+
+Before scaling the corpus, create 5 deeply researched reference pages representing different evidence profiles.
+
+Example categories:
+
+```text
+A — approved therapeutic peptide
+B — investigational peptide with human trials
+C — peptide with mostly preclinical evidence
+D — endogenous biological peptide
+E — highly speculative research compound
+```
+
+Use these pages to validate:
+
+- data model
+- evidence grading
+- citation UX
+- information architecture
+- safety language
+- visual design
+
+Only after these are satisfactory should the research pipeline scale to the full initial catalog.
+
+---
+
+# 31. RESEARCH UPDATE SYSTEM
+
+Scientific pages should track freshness.
+
+Each peptide should store:
+
+```text
+last_researched_at
+last_reviewed_at
+next_review_due
+```
+
+Allow the research system to detect:
+
+```text
+new PubMed papers
+new clinical trials
+trial status changes
+FDA updates
+regulatory changes
+```
+
+These changes should create review tasks rather than publish automatically.
+
+---
+
+# 32. VERSION HISTORY
+
+Scientific content needs revision history.
+
+Store:
+
+```text
+what changed
+when
+who changed it
+why
+sources added
+evidence grade changes
+```
+
+Visitors may optionally see:
+
+> Updated October 2026 because new human trial data became available.
+
+---
+
+# 33. RECOMMENDED DATABASE
+
+Prefer PostgreSQL.
+
+Supabase is acceptable and likely appropriate because it provides:
+
+```text
+PostgreSQL
+Auth
+Row Level Security
+Storage
+Realtime if later required
+```
+
+Use migrations.
+
+Do not allow the database schema to emerge ad hoc.
+
+---
+
+# 34. SUGGESTED TECHNICAL ARCHITECTURE
+
+Preferred:
+
+```text
+Frontend
+Next.js
+React
+TypeScript
+Tailwind
+shadcn/ui
+
+Database
+PostgreSQL / Supabase
+
+Research workers
+Python or TypeScript
+
+Background jobs
+Queue-based worker architecture
+
+Search
+Postgres full-text initially
+Optional Typesense/Meilisearch later
+
+AI
+Provider abstraction
+Structured JSON outputs
+Schema validation
+
+Validation
+Zod / Pydantic
+```
+
+Do not tightly couple the system to one LLM provider.
+
+---
+
+# 35. COMPUTER-USE AGENT RESPONSIBILITIES
+
+The implementation agent is authorized to use browser/computer tools to:
+
+- inspect public scientific databases
+- understand APIs
+- inspect terms of use
+- test data retrieval
+- locate documentation
+- investigate source availability
+- build initial peptide records
+- validate UI against live source information
+
+The agent must prefer official APIs and downloadable datasets over brittle scraping whenever available.
+
+Respect:
+
+```text
+robots.txt
+rate limits
+source terms
+licensing requirements
+```
+
+---
+
+# 36. RESEARCH PIPELINE IMPLEMENTATION
+
+Target workflow:
+
+```text
+1. Create peptide seed
+
+2. Resolve canonical identity
+
+3. Find aliases
+
+4. Query structured databases
+
+5. Discover scientific literature
+
+6. Discover clinical trials
+
+7. Discover regulatory information
+
+8. Normalize sources
+
+9. Extract structured evidence
+
+10. Generate draft claims
+
+11. Assign provisional evidence grades
+
+12. Generate article draft
+
+13. Human/editor review
+
+14. Approve claims
+
+15. Publish
+```
+
+---
+
+# 37. DATA QUALITY RULES
+
+The application must prevent:
+
+- duplicate peptide identities
+- duplicate papers
+- alias fragmentation
+- orphan citations
+- claims without sources
+- clinical trial duplication
+- invalid regulatory labels
+
+Implement normalization around identifiers such as:
+
+```text
+PMID
+DOI
+ClinicalTrials.gov NCT ID
+PubChem CID
+IUPHAR ID
+```
+
+---
+
+# 38. PRODUCT TRUST FEATURES
+
+Display prominently:
+
+```text
+Last reviewed
+Number of references
+Human study count
+Clinical trial count
+Evidence grade
+Regulatory status
+```
+
+Create a public page explaining:
+
+> How We Grade Evidence
+
+Describe exactly what each evidence level means.
+
+Transparency itself should be a product feature.
+
+---
+
+# 39. ANALYTICS
+
+Track anonymous product usage such as:
+
+```text
+searches
+zero-result searches
+peptide views
+research-area views
+citation clicks
+related-peptide clicks
+comparison usage
+audience variant
+```
+
+Do not collect medical history in MVP.
+
+Use analytics to discover what visitors want to learn about.
+
+---
+
+# 40. SECURITY
+
+Implement:
+
+- secure authentication for admin tools
+- role-based permissions
+- server-side authorization
+- input validation
+- rate limiting
+- audit logs
+- secret management
+
+Roles:
+
+```text
+viewer
+researcher
+editor
+admin
+```
+
+Only editors/admins may publish.
+
+---
+
+# 41. TESTING
+
+At minimum:
+
+## Unit tests
+
+- evidence grading logic
+- normalization
+- search aliases
+- citation mapping
+- regulatory status handling
+
+## Integration tests
+
+- research ingestion
+- publication workflow
+- database relationships
+- search
+- authentication
+
+## End-to-end tests
+
+- search peptide
+- open peptide
+- inspect citations
+- browse research area
+- compare peptides
+- admin review
+- publish article
+
+---
+
+# 42. DEVELOPMENT PHASES
+
+## Phase 0 — Research and architecture
+
+Before writing substantial application code:
+
+- inspect source APIs
+- validate data availability
+- document architecture
+- finalize schema
+- define evidence rubric
+- define citation model
+
+Deliver:
+
+```text
+/docs/architecture.md
+/docs/data-model.md
+/docs/research-sources.md
+/docs/evidence-rubric.md
+/docs/compliance-model.md
+```
+
+---
+
+## Phase 1 — Core data platform
+
+Build:
+
+- database
+- peptide model
+- evidence model
+- source model
+- regulatory model
+- citation system
+
+Seed 5 peptides.
+
+---
+
+## Phase 2 — Research pipeline
+
+Build:
+
+- structured source retrieval
+- PubMed integration
+- ClinicalTrials integration
+- PubChem integration
+- supported pharmacology sources
+- AI extraction pipeline
+- provenance system
+
+---
+
+## Phase 3 — Editorial workflow
+
+Build:
+
+- admin
+- research queue
+- evidence review
+- claim approval
+- publishing
+- revision history
+
+---
+
+## Phase 4 — Public Wiki
+
+Build:
+
+- homepage
+- search
+- peptide page
+- category pages
+- reference system
+- evidence indicators
+
+---
+
+## Phase 5 — Discovery
+
+Build:
+
+- research-area browsing
+- peptide-family browsing
+- evidence browsing
+- related peptides
+- comparison
+
+---
+
+## Phase 6 — Audience variants
+
+Build:
+
+- women's visual system
+- 50+ visual system
+- shared canonical content rendering
+
+---
+
+## Phase 7 — Quality
+
+Perform:
+
+- accessibility audit
+- responsive testing
+- performance optimization
+- SEO
+- security review
+- scientific provenance audit
+
+---
+
+# 43. MVP ACCEPTANCE CRITERIA
+
+The MVP is complete when:
+
+1. At least 20 peptide records exist.
+
+2. At least 5 are deeply researched reference-quality pages.
+
+3. Every published substantive scientific claim has at least one source.
+
+4. Evidence is visibly separated between:
+   - cell
+   - animal
+   - human
+   - clinical
+
+5. Regulatory status appears on every peptide.
+
+6. Unknown safety information is explicitly represented as unknown.
+
+7. Users can search by peptide name and aliases.
+
+8. Users can browse by research area.
+
+9. Users can browse by evidence level.
+
+10. Users can compare at least two peptides.
+
+11. Clinical trials are linked when available.
+
+12. Every peptide has a references section.
+
+13. Researchers can draft and review pages.
+
+14. AI-generated drafts cannot bypass editorial approval.
+
+15. Both audience experiences render from identical scientific records.
+
+16. Mobile and desktop layouts are complete.
+
+17. Accessibility requirements are substantially met.
+
+18. No medical recommendation or dosing system exists.
+
+19. Provenance is retained for every important scientific claim.
+
+20. The implementation has documentation sufficient for another engineer to continue development.
+
+---
+
+# 44. SUCCESS METRIC
+
+The primary success test is:
+
+> Can a curious non-specialist arrive knowing only the name of a peptide and leave understanding what it is, why researchers care about it, how much evidence actually exists, what remains unknown, and where to read the original science?
+
+Secondary test:
+
+> Can someone who does not know a peptide name browse the research landscape and learn without being pushed toward unsupported medical conclusions?
+
+---
+
+# 45. IMPLEMENTATION PRINCIPLES
+
+Throughout implementation:
+
+DO:
+
+- prefer authoritative sources
+- retain provenance
+- distinguish evidence levels
+- surface uncertainty
+- explain terminology
+- write original summaries
+- cite aggressively
+- design for comprehension
+- separate research from marketing
+
+DO NOT:
+
+- scrape another seller and paraphrase its pages
+- fabricate citations
+- infer missing science
+- convert animal evidence into human claims
+- treat an AI summary as a source
+- hide uncertain evidence
+- generate medical recommendations
+- build around SEO spam
+- imply regulatory approval where none exists
+
+---
+
+# 46. FIRST EXECUTION INSTRUCTION
+
+Begin with **Phase 0 only**.
+
+Before implementing the application:
+
+1. Inspect the public APIs, datasets, and documentation available from:
+   - PubMed
+   - ClinicalTrials.gov
+   - PubChem
+   - IUPHAR/BPS Guide to Pharmacology
+   - FDA
+   - RCSB PDB
+   - other clearly useful authoritative sources discovered during research
+
+2. Determine:
+   - what data can be fetched automatically
+   - what requires browser research
+   - licensing or attribution requirements
+   - rate limits
+   - source stability
+   - identifier relationships
+
+3. Produce the architecture and research-source documentation.
+
+4. Build the proposed normalized database schema.
+
+5. Define the evidence grading rubric precisely enough that the same evidence should normally receive the same grade regardless of which researcher reviews it.
+
+6. Select five representative peptides for the validation corpus.
+
+Do not prematurely build the full frontend.
+
+The scientific information architecture and provenance model are the foundation of the product.
+
+Once Phase 0 is complete and internally validated, proceed through the subsequent phases autonomously unless a genuine product-level decision cannot reasonably be inferred from this PRD.
