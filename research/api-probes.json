@@ -1,0 +1,348 @@
+{
+  "purpose": "Transport/schema smoke observations, not verified scientific claims",
+  "observations": [
+    {
+      "name": "pubmed_search",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=elamipretide&retmax=2&retmode=json&tool=peppy_tides_phase0",
+      "retrieved_at": "2026-10-18T16:54:06.332969+00:00",
+      "status": 200,
+      "content_type": "application/json; charset=UTF-8",
+      "final_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=elamipretide&retmax=2&retmode=json&tool=peppy_tides_phase0",
+      "response_headers": {},
+      "bytes_read": 664,
+      "sha256": "4210323fd1feaf004a9c9d833e2bf4e20fcea01ffe3b8bac33a0ff587404c90a",
+      "top_level_keys": [
+        "esearchresult",
+        "header"
+      ],
+      "evidence": {
+        "count": "362",
+        "retmax": "2",
+        "retstart": "0",
+        "idlist": [
+          "42827331",
+          "42794697"
+        ],
+        "translationset": [
+          {
+            "from": "elamipretide",
+            "to": "\"elamipretide\"[Supplementary Concept] OR \"elamipretide\"[All Fields] OR \"arginyl-2,'6'-dimethyltyrosyl-lysyl-phenylalaninamide\"[Supplementary Concept] OR \"arginyl-2,'6'-dimethyltyrosyl-lysyl-phenylalaninamide\"[All Fields]"
+          }
+        ],
+        "querytranslation": "\"elamipretide\"[Supplementary Concept] OR \"elamipretide\"[All Fields] OR \"arginyl 2 6 dimethyltyrosyl lysyl phenylalaninamide\"[Supplementary Concept] OR \"arginyl 2 6 dimethyltyrosyl lysyl phenylalaninamide\"[All Fields]"
+      }
+    },
+    {
+      "name": "pubmed_fetch",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29718389&retmode=xml&tool=peppy_tides_phase0",
+      "retrieved_at": "2026-10-18T16:54:06.728479+00:00",
+      "status": 200,
+      "content_type": "text/xml; charset=UTF-8",
+      "final_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29718389&retmode=xml&tool=peppy_tides_phase0",
+      "response_headers": {},
+      "bytes_read": 13975,
+      "sha256": "02397f511cedc7296a41ff6f57aeb9bc52db1b3970bbbc6d75f057328798eff3",
+      "evidence": {
+        "root": "PubmedArticleSet",
+        "pmid": "29718389",
+        "abstract_present": true,
+        "full_text_body_present": false
+      }
+    },
+    {
+      "name": "clinicaltrials",
+      "url": "https://clinicaltrials.gov/api/v2/studies?query.intr=elamipretide&pageSize=1&format=json",
+      "retrieved_at": "2026-10-18T16:54:07.013690+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "final_url": "https://clinicaltrials.gov/api/v2/studies?query.intr=elamipretide&pageSize=1&format=json",
+      "response_headers": {},
+      "bytes_read": 67325,
+      "sha256": "75f0fee9911da44c6955318c788b5d66580dcbea360e9311d48e7415e5139d2c",
+      "top_level_keys": [
+        "nextPageToken",
+        "studies"
+      ],
+      "evidence": {
+        "study_keys": [
+          "derivedSection",
+          "documentSection",
+          "hasResults",
+          "protocolSection",
+          "resultsSection"
+        ],
+        "identification": {
+          "nctId": "NCT02788747",
+          "orgStudyIdInfo": {
+            "id": "SPIHF-201"
+          },
+          "secondaryIdInfos": [
+            {
+              "id": "2014-005724-10",
+              "type": "EUDRACT_NUMBER"
+            },
+            {
+              "id": "2014",
+              "type": "NIH",
+              "link": "https://reporter.nih.gov/quickSearch/2014"
+            }
+          ],
+          "organization": {
+            "fullName": "Stealth BioTherapeutics Inc.",
+            "class": "INDUSTRY"
+          },
+          "briefTitle": "Effect of Elamipretide on Left Ventricular Function in Subjects With Stable Heart Failure With Reduced Ejection Fraction",
+          "officialTitle": "A Phase 2 Randomized, Double-Blinded, Placebo-Controlled Study to Evaluate the Effects of Multiple Subcutaneous Injections of Elamipretide on Left Ventricular Function in Subjects With Stable Heart Failure With Reduced Ejection Fraction"
+        },
+        "hasResults": true
+      }
+    },
+    {
+      "name": "pubchem",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxytocin/property/MolecularFormula,MolecularWeight,InChIKey/JSON",
+      "retrieved_at": "2026-10-18T16:54:07.390183+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "final_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/oxytocin/property/MolecularFormula,MolecularWeight,InChIKey/JSON",
+      "response_headers": {
+        "X-Throttling-Control": "Request Count status: Green (0%), Request Time status: Green (0%), Service status: Green (20%)"
+      },
+      "bytes_read": 227,
+      "sha256": "ef87e7f48ed24de1ff34c1d85c1527578666f286d151646aad27eaa293734662",
+      "top_level_keys": [
+        "PropertyTable"
+      ],
+      "evidence": {
+        "Properties": [
+          {
+            "CID": 439302,
+            "MolecularFormula": "C43H66N12O12S2",
+            "MolecularWeight": "1007.2",
+            "InChIKey": "XNOPRXBHLZRZKH-DSZYJQQASA-N"
+          }
+        ]
+      }
+    },
+    {
+      "name": "iuphar",
+      "url": "https://www.guidetopharmacology.org/services/ligands?name=oxytocin",
+      "retrieved_at": "2026-10-18T16:54:07.720345+00:00",
+      "status": 401,
+      "error_type": "HTTPError",
+      "response_prefix": "{\"message\":\"API key is missing. In order to use the GtoPdb Web Services you must register and request an API Key. https://www.guidetopharmacology.org/login.jsp\"}"
+    },
+    {
+      "name": "openfda",
+      "url": "https://api.fda.gov/drug/drugsfda.json?search=products.active_ingredients.name:%22BREMELANOTIDE%22&limit=1",
+      "retrieved_at": "2026-10-18T16:54:08.509980+00:00",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "final_url": "https://api.fda.gov/drug/drugsfda.json?search=products.active_ingredients.name:%22BREMELANOTIDE%22&limit=1",
+      "response_headers": {},
+      "bytes_read": 3977,
+      "sha256": "2984271476712f0daf125dd273ceca749d6ea606a5168f14f752b1437fffdb3c",
+      "top_level_keys": [
+        "meta",
+        "results"
+      ],
+      "evidence": {
+        "application_number": "NDA210557",
+        "result_keys": [
+          "application_number",
+          "openfda",
+          "products",
+          "sponsor_name",
+          "submissions"
+        ],
+        "meta": {
+          "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+          "terms": "https://open.fda.gov/terms/",
+          "license": "https://open.fda.gov/license/",
+          "last_updated": "2026-10-16",
+          "results": {
+            "skip": 0,
+            "limit": 1,
+            "total": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "rcsb",
+      "url": "https://data.rcsb.org/rest/v1/core/entry/1AON",
+      "retrieved_at": "2026-10-18T16:54:09.224805+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "final_url": "https://data.rcsb.org/rest/v1/core/entry/1AON",
+      "response_headers": {},
+      "bytes_read": 17348,
+      "sha256": "01b5d00ac0422c3d3535d4ec6489d947760281e1a8a724d21ffaea6b9dea1118",
+      "top_level_keys": [
+        "audit_author",
+        "cell",
+        "citation",
+        "database_2",
+        "diffrn",
+        "diffrn_detector",
+        "diffrn_radiation",
+        "diffrn_source",
+        "entry",
+        "exptl",
+        "exptl_crystal",
+        "exptl_crystal_grow",
+        "pdbx_audit_revision_category",
+        "pdbx_audit_revision_details",
+        "pdbx_audit_revision_group",
+        "pdbx_audit_revision_history",
+        "pdbx_audit_revision_item",
+        "pdbx_database_status",
+        "pdbx_initial_refinement_model",
+        "pdbx_vrpt_summary",
+        "pdbx_vrpt_summary_diffraction",
+        "pdbx_vrpt_summary_geometry",
+        "rcsb_accession_info",
+        "rcsb_entry_container_identifiers",
+        "rcsb_entry_info",
+        "rcsb_id",
+        "rcsb_primary_citation",
+        "refine",
+        "refine_analyze",
+        "refine_hist",
+        "refine_ls_restr",
+        "reflns",
+        "reflns_shell",
+        "software",
+        "struct",
+        "struct_keywords",
+        "symmetry"
+      ],
+      "evidence": {
+        "rcsb_id": "1AON",
+        "identifier_keys": [
+          "assembly_ids",
+          "entity_ids",
+          "entry_id",
+          "model_ids",
+          "non_polymer_entity_ids",
+          "polymer_entity_ids",
+          "pubmed_id",
+          "rcsb_id"
+        ]
+      }
+    },
+    {
+      "name": "uniprot",
+      "url": "https://rest.uniprot.org/uniprotkb/P01178.json",
+      "retrieved_at": "2026-10-18T16:54:09.475924+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "final_url": "https://rest.uniprot.org/uniprotkb/P01178.json",
+      "response_headers": {
+        "X-UniProt-Release": "2026_03",
+        "X-UniProt-Release-Date": "02-September-2026"
+      },
+      "bytes_read": 48406,
+      "sha256": "01b9b9ddbb8e83940863ee7f0702cd8e715a820dcb36f051049ab44df649fd8c",
+      "top_level_keys": [
+        "annotationScore",
+        "comments",
+        "entryAudit",
+        "entryType",
+        "extraAttributes",
+        "features",
+        "genes",
+        "keywords",
+        "organism",
+        "primaryAccession",
+        "proteinDescription",
+        "proteinExistence",
+        "references",
+        "secondaryAccessions",
+        "sequence",
+        "uniProtKBCrossReferences",
+        "uniProtkbId"
+      ],
+      "evidence": {
+        "primaryAccession": "P01178",
+        "entryType": "UniProtKB reviewed (Swiss-Prot)",
+        "organism": "Homo sapiens",
+        "sequence_length": 125,
+        "cross_reference_databases": [
+          "AGR",
+          "Agora",
+          "AlphaFoldDB",
+          "Antibodypedia",
+          "Bgee",
+          "BioGRID",
+          "BioGRID-ORCS",
+          "BioMuta",
+          "CCDS",
+          "CTD",
+          "ChEMBL",
+          "ClinPGx",
+          "DMDM",
+          "DNASU",
+          "DisGeNET",
+          "DrugBank",
+          "DrugCentral",
+          "EMBL",
+          "EMDB",
+          "Ensembl",
+          "ExpressionAtlas",
+          "FunCoup",
+          "FunFam",
+          "GO",
+          "Gene3D",
+          "GeneCards",
+          "GeneID",
+          "GeneTree",
+          "GeneWiki",
+          "GenomeRNAi",
+          "HGNC",
+          "HOGENOM",
+          "HPA",
+          "InParanoid",
+          "IntAct",
+          "InterPro",
+          "KEGG",
+          "MANE-Select",
+          "MDposit",
+          "MIM",
+          "MassIVE",
+          "NDEx",
+          "OMA",
+          "OpenTargets",
+          "OrthoDB",
+          "PAN-GO",
+          "PANTHER",
+          "PDB",
+          "PDBsum",
+          "PIR",
+          "PIRSF",
+          "PRINTS",
+          "PRO",
+          "PROSITE",
+          "PathwayCommons",
+          "PaxDb",
+          "PeptideAtlas",
+          "Pfam",
+          "Pharos",
+          "PhylomeDB",
+          "Proteomes",
+          "ProteomicsDB",
+          "RNAct",
+          "Reactome",
+          "RefSeq",
+          "SIGNOR",
+          "SMART",
+          "SMR",
+          "STRING",
+          "SUPFAM",
+          "SignaLink",
+          "VEuPathDB",
+          "eggNOG"
+        ]
+      }
+    }
+  ]
+}
