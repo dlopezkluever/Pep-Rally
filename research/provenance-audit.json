@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-18T22:13:01.876Z",
+  "scope": "Structural provenance only; not scientific or human editorial validation.",
+  "counts": {
+    "identities": 22,
+    "revisions_with_claims": 5,
+    "claims": 29,
+    "approved_claims": 0,
+    "source_observations": 154,
+    "trial_snapshots": 4,
+    "historical_publications": 0,
+    "active_publications": 0,
+    "successful_jobs": 2
+  },
+  "violations": []
+}
